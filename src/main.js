@@ -42,12 +42,15 @@ async function fetchAndRenderImages() {
 
   try {
     const { hits, totalHits } = await fetchImages(query, page, perPage);
+
     if (hits.length === 0) {
       iziToast.error({
         title: "Error",
         message: "Sorry, no images match your search query. Please try again.",
         position: "topRight",
       });
+
+      loadMoreBtn.style.display = 'none';
       return;
     }
 
@@ -105,11 +108,9 @@ function scrollPage() {
 function showLoadingIndicator() {
   const indicator = document.getElementById('loading-indicator');
   indicator.style.display = 'block';
-  loadMoreBtn.style.display = 'none';
 }
 
 function hideLoadingIndicator() {
   const indicator = document.getElementById('loading-indicator');
   indicator.style.display = 'none';
-  loadMoreBtn.style.display = 'block';
 }
